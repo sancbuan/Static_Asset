@@ -1,0 +1,31 @@
+name: smms_download
+
+on:
+  push:
+    branches: [smms] 
+    paths-ignore: 
+      - README.md
+  schedule:
+    - cron: "0 0 * * 1"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 18.x
+      - run: python3 smms-image.py ${{ secrets.SMMS_TOKEN }}
+      
+      - name: Upload
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_PRIVATE }}
+          #external_repository: username/external-repository
+          publish_dir: ./
+          publish_branch: smms
+          force_orphan: true
+          user_name: 'sancbuan'
+          user_email: 'sancbuan@outlook.com'
+          full_commit_message: ${{ github.event.head_commit.message }}
