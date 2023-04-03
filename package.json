@@ -1,0 +1,12 @@
+{
+  "name": "utopian",
+  "description": "utopian",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Hello World\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Mr.Kingslayer",
+  "license": "ISC"
+}

@@ -1,0 +1,21 @@
+name: Deploy to NPM CDN
+
+on:
+  push:
+    branches: [npm] 
+    paths-ignore: 
+      - README.md
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 18.x
+      #- run: python3 new_version.py
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
